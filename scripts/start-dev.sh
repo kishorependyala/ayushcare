@@ -13,12 +13,12 @@ lsof -ti:19006 | xargs kill -9 2>/dev/null || true
 
 # Start backend in background
 echo "Starting Python Flask backend..."
-cd /Users/kishorependyala/git/ayushcare/api_py && /opt/homebrew/bin/python3.12 -m pip install -r requirements.txt && /opt/homebrew/bin/python3.12 app.py &
+cd ../api_py && python3 -m pip install -r requirements.txt && python3 app.py &
 BACKEND_PID=$!
 
 # Start frontend in background
 echo "Starting Expo web frontend..."
-cd /Users/kishorependyala/git/ayushcare/app && npm run web &
+cd ../app && npm run web &
 FRONTEND_PID=$!
 
 echo "Backend PID: $BACKEND_PID"

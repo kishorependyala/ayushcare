@@ -11,7 +11,7 @@ Build a single codebase experience for patients to:
 
 ## Selected architecture
 - Frontend: `Expo` + `React Native Web` + `TypeScript` in `app/`
-- Backend: `Python Flask` API in `api_py/` (runs on port 5000)
+- Backend: `Python Flask` API in `api_py/` (runs on port 7071)
 - Database: `Azure Cosmos DB`
 - Deployment: `Azure Static Web Apps` with GitHub auto-deploy
 - Domain: GoDaddy custom domain attached to Azure
@@ -22,16 +22,16 @@ Each item is marked so the project can restart cleanly.
 ### Phase 1: scaffold and login
 - [x] Create Expo + TypeScript app scaffold
 - [x] Configure Expo web support for browser development
-- [x] Create Azure Functions backend scaffold
+- [x] Create Python Flask backend scaffold
 - [x] Implement mock OTP login flow
 - [x] Implement local auth state and token/session handling
-- [x] Add backend unit tests for OTP endpoints
-- [ ] Add frontend UI validation for login screens
-- [ ] Run test cases and manually validate login UI on web
+- [ ] Add backend unit tests for OTP endpoints
+- [x] Add frontend UI validation for login screens
+- [x] Run test cases and manually validate login UI on web
 
 ### Phase 2: patient core features
-- [ ] Add patient profile view/edit UI
-- [ ] Add medical record creation and listing
+- [x] Add patient profile view/edit UI
+- [x] Add medical record creation and listing
 - [ ] Add access request workflow for doctors/hospitals
 - [ ] Add patient approval step for external access
 - [ ] Add backend tests for patient/profile record APIs

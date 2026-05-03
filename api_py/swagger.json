@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AyushCare API",
+    "version": "1.0.0",
+    "description": "API for AyushCare Electronic Health Records"
+  },
+  "host": "localhost:7071",
+  "basePath": "/api",
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/sendOtp": {
+      "post": {
+        "summary": "Send OTP to phone (mock: OTP is the phone number)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "type": "string",
+                  "example": "+1234567890"
+                }
+              },
+              "required": ["phone"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP sent",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "otp": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid phone",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verifyOtp": {
+      "post": {
+        "summary": "Verify OTP (mock: code should be the phone number)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "type": "string",
+                  "example": "+1234567890"
+                },
+                "code": {
+                  "type": "string",
+                  "example": "+1234567890"
+                }
+              },
+              "required": ["phone", "code"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP verified",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid OTP",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "summary": "Get patient profile",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Profile data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "email": {"type": "string"},
+                "dob": {"type": "string"}
+              }
+            }
+          },
+          "401": {"description": "Unauthorized"}
+        }
+      },
+      "post": {
+        "summary": "Update patient profile",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "email": {"type": "string"},
+                "dob": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {"description": "Profile updated"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    },
+    "/records": {
+      "get": {
+        "summary": "Get medical records",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "List of records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "date": {"type": "string"}
+                }
+              }
+            }
+          },
+          "401": {"description": "Unauthorized"}
+        }
+      },
+      "post": {
+        "summary": "Add medical record",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {"type": "string"},
+                "description": {"type": "string"},
+                "date": {"type": "string"}
+              },
+              "required": ["title"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "Record added"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    }
+  }
+}
