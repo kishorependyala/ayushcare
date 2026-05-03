@@ -47,7 +47,9 @@ Each item is marked so the project can restart cleanly.
 - [ ] Add CI test pipeline for backend and frontend
 - [ ] Perform end-to-end validation after deployment
 
-## Restart notes for next session
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete Azure deployment instructions.
 When restarting, review this README and follow the first incomplete item under "Development plan." Use the status checkboxes to continue with the next task.
 
 ### Current status
