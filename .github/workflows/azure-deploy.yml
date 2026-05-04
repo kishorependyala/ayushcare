@@ -33,34 +33,7 @@ jobs:
           app_location: "app"
           output_location: "web-build"
           skip_app_build: false
-
-  build_and_deploy_backend:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build and Deploy Backend
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.14'
-      - name: Install dependencies
-        run: |
-          cd api_py
-          pip install -r requirements.txt
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Zip and Deploy Python API
-        run: |
-          cd api_py
-          # Zip the current folder's contents into a file called 'deploy.zip'
-          zip -r deploy.zip . 
-          
-          # Deploy the specific zip file
-          az webapp deploy --name ayushcare-api --resource-group ayushcare-rg --src-path deploy.zip --type zip
-  close_pull_request_job:
+close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
