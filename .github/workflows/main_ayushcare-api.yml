@@ -74,6 +74,6 @@ jobs:
         with:
           app-name: 'ayushcare-api'
           slot-name: 'Production'
-          startup-command: 'gunicorn --bind=0.0.0.0 --timeout 600 api_py.app:app'
-          stastartup-command: 'python api_py/app.py'
+          startup-command: 'python api_py/app.py'
+        
           
