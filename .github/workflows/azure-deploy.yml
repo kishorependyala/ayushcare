@@ -43,16 +43,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.14'
       - name: Install dependencies
         run: |
           cd api_py
           pip install -r requirements.txt
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy Backend to Azure App Service
         run: |
-          # Deploy to Azure App Service (requires Azure credentials)
-          # This step will be configured after Azure App Service is set up
-          echo "Backend deployment to Azure App Service"
+          cd api_py
+          az webapp up --src . --name ayushcare-api --resource-group ayushcare-rg --runtime "PYTHON|3.14"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
