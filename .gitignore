@@ -16,3 +16,4 @@ yarn-error.log*
 # Build output
 dist/
 azure-credentials.json
+api_py/__pycache__/*

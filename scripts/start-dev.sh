@@ -13,7 +13,7 @@ lsof -ti:19006 | xargs kill -9 2>/dev/null || true
 
 # Start backend in background
 echo "Starting Python Flask backend..."
-cd ~/git/ayushcare/api_py && python3 -m pip install -r requirements.txt && python3 app.py &
+cd ~/git/ayushcare/api_py && python3 -m pip install -r requirements.txt && gunicorn --bind=0.0.0.0:8000 app:app &
 BACKEND_PID=$!
 
 # Start frontend in background
