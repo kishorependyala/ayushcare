@@ -52,11 +52,14 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy Backend to Azure App Service
+      - name: Zip and Deploy Python API
         run: |
           cd api_py
-          az webapp deploy --name ayushcare-api --resource-group ayushcare-rg --src-path . --type zip
-
+          # Zip the current folder's contents into a file called 'deploy.zip'
+          zip -r deploy.zip . 
+          
+          # Deploy the specific zip file
+          az webapp deploy --name ayushcare-api --resource-group ayushcare-rg --src-path deploy.zip --type zip
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
