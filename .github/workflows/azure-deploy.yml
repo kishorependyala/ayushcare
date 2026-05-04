@@ -55,7 +55,7 @@ jobs:
       - name: Deploy Backend to Azure App Service
         run: |
           cd api_py
-          az webapp deployment source config-zip --name ayushcare-api --resource-group ayushcare-rg --src .
+          az webapp deploy --name ayushcare-api --resource-group ayushcare-rg --src-path . --type zip
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
