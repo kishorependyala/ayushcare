@@ -33,6 +33,7 @@ jobs:
           app_location: "app"
           output_location: "web-build"
           skip_app_build: false
+          
 close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
