@@ -74,4 +74,5 @@ jobs:
         with:
           app-name: 'ayushcare-api'
           slot-name: 'Production'
+          stastartup-command: 'python api_py/app.py'
           
