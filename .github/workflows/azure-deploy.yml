@@ -1,5 +1,3 @@
-name: Deploy to Azure Static Web Apps
-
 on:
   push:
     branches:
@@ -31,10 +29,11 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "app"
-          output_location: "web-build"
+          output_location: "web-build" # Verify this matches your build output folder
           skip_app_build: false
-          
-close_pull_request_job:
+
+  # This job MUST be indented at the same level as build_and_deploy_frontend
+  close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
