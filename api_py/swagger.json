@@ -5,7 +5,6 @@
     "version": "1.0.0",
     "description": "API for AyushCare Electronic Health Records"
   },
-  "host": "localhost:7071",
   "basePath": "/api",
   "securityDefinitions": {
     "bearerAuth": {

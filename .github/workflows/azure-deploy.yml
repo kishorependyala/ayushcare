@@ -1,5 +1,3 @@
-name: Deploy to Azure Static Web Apps
-
 on:
   push:
     branches:
@@ -22,7 +20,7 @@ jobs:
         run: |
           cd app
           npm install
-          npm run web
+          npm run build
       - name: Build And Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -31,29 +29,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "app"
-          output_location: "dist"
-          skip_app_build: true
+          output_location: "web-build" # Verify this matches your build output folder
+          skip_app_build: false
 
-  build_and_deploy_backend:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build and Deploy Backend
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: |
-          cd api_py
-          pip install -r requirements.txt
-      - name: Deploy Backend to Azure App Service
-        run: |
-          # Deploy to Azure App Service (requires Azure credentials)
-          # This step will be configured after Azure App Service is set up
-          echo "Backend deployment to Azure App Service"
-
+  # This job MUST be indented at the same level as build_and_deploy_frontend
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest

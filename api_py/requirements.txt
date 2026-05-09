@@ -1,3 +1,9 @@
+blinker==1.9.0
+click==8.3.3
 Flask==2.3.3
-flask-swagger-ui
-flask-cors
+flask-cors==6.0.2
+flask-swagger-ui==5.32.4
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+Werkzeug==3.1.8

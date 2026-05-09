@@ -1,5 +1,9 @@
+const isLocal = window.location.hostname === 'localhost';
+
 const config = {
-  apiBaseUrl: 'http://localhost:7071/api',
+  apiBaseUrl: isLocal 
+    ? 'http://localhost:8000/api' 
+    : `${window.location.origin}/api`,
 };
 
 export default config;

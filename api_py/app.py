@@ -136,5 +136,10 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
+@app.route('/')
+def root():
+    from flask import redirect
+    return redirect('/swagger/', code=302)
+
 if __name__ == '__main__':
     app.run(debug=True, port=7071)
